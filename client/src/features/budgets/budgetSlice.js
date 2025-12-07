@@ -37,6 +37,23 @@ export const setBudget = createAsyncThunk('budgets/set', async (budgetData, thun
     }
 });
 
+// Delete budget
+export const deleteBudget = createAsyncThunk('budgets/delete', async (id, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.user.token;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await axios.delete(API_URL + '/' + id, config);
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+});
+
 const initialState = {
     budgets: [],
     isError: false,
@@ -86,6 +103,21 @@ export const budgetSlice = createSlice({
                 }
             })
             .addCase(setBudget.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+            })
+            .addCase(deleteBudget.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteBudget.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.budgets = state.budgets.filter(
+                    (budget) => budget._id !== action.payload.id
+                );
+            })
+            .addCase(deleteBudget.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = action.payload;

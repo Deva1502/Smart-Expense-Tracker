@@ -12,7 +12,7 @@ router.post('/analyze', protect, async (req, res) => {
         const budgets = await Budget.find({ user: req.user._id });
         console.log(expenses);
         console.log(budgets);
-        
+
 
         // Prepare data for prompt
         const expenseSummary = JSON.stringify(expenses);

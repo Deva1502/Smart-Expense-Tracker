@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = 'https://smart-expense-tracker-c9xv.onrender.com/api/auth';
 
 // Register user
 export const register = createAsyncThunk('auth/register', async (userData, thunkAPI) => {

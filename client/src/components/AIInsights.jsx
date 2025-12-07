@@ -20,7 +20,7 @@ function AIInsights() {
         },
       };
       const response = await axios.post(
-        "http://localhost:5000/api/ai/analyze",
+        "https://smart-expense-tracker-c9xv.onrender.com/api/ai/analyze",
         {},
         config
       );

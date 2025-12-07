@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/expenses';
+const API_URL = 'https://smart-expense-tracker-c9xv.onrender.com/api/expenses';
 
 // Get expenses
 export const getExpenses = createAsyncThunk('expenses/getAll', async (_, thunkAPI) => {

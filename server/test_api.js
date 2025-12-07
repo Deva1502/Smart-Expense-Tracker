@@ -5,7 +5,7 @@ async function testExpenseCreation() {
         console.log('1. Registering user...');
         // Use a random email to avoid duplication errors
         const email = `test${Math.floor(Math.random() * 10000)}@example.com`;
-        const userRes = await axios.post('http://localhost:5000/api/auth/signup', {
+        const userRes = await axios.post('https://smart-expense-tracker-c9xv.onrender.com/api/auth/signup', {
             name: 'Debug User',
             email: email,
             password: 'password123',
@@ -16,7 +16,7 @@ async function testExpenseCreation() {
         console.log('User registered. Token:', token ? 'Received' : 'Missing');
 
         console.log('2. Creating expense...');
-        const expenseRes = await axios.post('http://localhost:5000/api/expenses', {
+        const expenseRes = await axios.post('https://smart-expense-tracker-c9xv.onrender.com/api/expenses', {
             description: 'Test Expense',
             amount: 50,
             category: 'Food',
